@@ -14,38 +14,38 @@ export default class Account extends Component {
 
   handleDepositClick(e) {
     e.preventDefault();
-    if (isNaN(this.refs.depositAmount.value) || this.refs.depositAmount.value < 0) {
+    if (isNaN(this.refs.amount.value) || this.refs.amount.value < 0) {
       console.log("Not a am acceptable  number");
     }
     else {
-      let depositAmount = +this.refs.depositAmount.value;
-      let newBalance = this.state.balance + depositAmount;
+      let amount = +this.refs.amount.value;
+      let newBalance = this.state.balance + amount;
       this.setState({
         balance: newBalance
       })
-      this.refs.depositAmount.value = '';
+      this.refs.amount.value = '';
     }
   }
 
     handleWithdrawalClick(e) {
         e.preventDefault();
-        if (isNaN(this.refs.withdrawalAmount.value)) {
+        if (isNaN(this.refs.amount.value)) {
             console.log("Not a number");
         }
         else {
-            let withdrawalAmount = +this.refs.withdrawalAmount.value;
-            if (this.state.balance < withdrawalAmount || this.state.balance === withdrawalAmount) {
+            let amount = +this.refs.amount.value;
+            if (this.state.balance < amount || this.state.balance === amount) {
                 this.setState({
                     balance: 0
                 })
-                this.refs.withdrawalAmount.value = '';
+                this.refs.amount.value = '';
             }
             else {
-                let newBalance = this.state.balance - withdrawalAmount;
+                let newBalance = this.state.balance - amount;
                 this.setState({
                     balance: newBalance
                 })
-                this.refs.withdrawalAmount.value = '';
+                this.refs.amount.value = '';
             }
         }
         }
@@ -59,10 +59,10 @@ export default class Account extends Component {
       <div className="account">
         <h2>{this.props.name}</h2>
         <div className={balanceClass}>${this.state.balance}</div>
-        <input type="text" placeholder="enter an amount" ref="depositAmount" />
+        <input type="text" placeholder="enter an amount" ref="amount" />
         <input type="button" value="Deposit" onClick={this.handleDepositClick} />
 
-          <input type="text" placeholder="enter an amount" ref="withdrawalAmount" />
+          {/*<input type="text" placeholder="enter an amount" ref="amount" />*/}
           <input type="button" value="Withdrawal" onClick={this.handleWithdrawalClick} />
       </div>
     )
